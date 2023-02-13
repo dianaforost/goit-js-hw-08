@@ -7,14 +7,14 @@ let formData = {};
 function valueInForm(event) {
   formData[event.target.name] = event.target.value;
   localStorage.setItem('feedback-form-state', JSON.stringify(formData));
-  console.log(formData);
 }
 
 function submitInForm(event) {
   event.preventDefault();
-  event.target.reset();
   console.log(JSON.parse(localStorage.getItem('feedback-form-state')));
   localStorage.removeItem('feedback-form-state');
+  event.target.reset();
+  formData = {};
 }
 
 function updateOutput() {

@@ -18,8 +18,6 @@ function submitInForm(event) {
   localStorage.removeItem('feedback-form-state');
   event.currentTarget.reset();
   formData = {};
-  console.log(event.currentTarget);
-  console.log(event.target);
 }
 
 function updateOutput() {

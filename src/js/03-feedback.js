@@ -7,7 +7,8 @@ let formData = {};
 updateOutput();
 
 function valueInForm(event) {
-  formData[event.target.name] = event.target.value.trim();
+  formData.email = event.target.closest('form').elements.email.value.trim();
+  formData.message = event.target.closest('form').elements.message.value.trim();
   localStorage.setItem('feedback-form-state', JSON.stringify(formData));
   updateOutput();
 }

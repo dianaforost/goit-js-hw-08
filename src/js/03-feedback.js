@@ -4,30 +4,34 @@ const email = document.querySelector('.feedback-form input');
 const message = document.querySelector('.feedback-form textarea');
 let formData = {};
 
+updateOutput();
+
 function valueInForm(event) {
-  formData[event.target.name] = event.target.value;
+  formData[event.target.name] = event.target.value.trim();
   localStorage.setItem('feedback-form-state', JSON.stringify(formData));
+  updateOutput();
 }
 
 function submitInForm(event) {
   event.preventDefault();
   console.log(JSON.parse(localStorage.getItem('feedback-form-state')));
   localStorage.removeItem('feedback-form-state');
-  event.target.reset();
+  event.currentTarget.reset();
   formData = {};
+  console.log(event.currentTarget);
+  console.log(event.target);
 }
 
 function updateOutput() {
-  const formState = JSON.parse(localStorage.getItem('feedback-form-state'));
+  const formState = localStorage.getItem('feedback-form-state');
+  const formObjectState = JSON.parse(
+    localStorage.getItem('feedback-form-state')
+  );
   if (formState) {
-    email.value = formState.email;
-    message.value = formState.message;
-  } else {
-    email.value = '';
-    message.value = '';
+    email.value = formObjectState.email || '';
+    message.value = formObjectState.message || '';
   }
 }
-updateOutput();
 
 form.addEventListener('input', throttle(valueInForm, 500));
 form.addEventListener('submit', submitInForm);
